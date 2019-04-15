@@ -1,0 +1,18 @@
+.THIS .inputFieldWidth {
+    width:100%;
+}
+
+.THIS dd {
+    width: 40%;
+}
+.THIS dt {
+    width: 60%;
+}
+
+.THIS .insidecard {    
+    margin-bottom: 20px !important;
+}
+
+.THIS .hastracknumber{
+    background-color: #ccffcc;
+}

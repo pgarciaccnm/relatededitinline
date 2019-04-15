@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RelatedEditInLine</fullName>
+    <types>
+        <members>inlineEditCtrl</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>inlineEditRow</members>
+        <members>inlineEditTable</members>
+        <name>AuraDefinitionBundle</name>
+    </types>
+    <types>
+        <members>Order.Case_Id__c</members>
+        <members>Order.Shipping_Attention__c</members>
+        <members>Order.Shipping_Institution__c</members>
+        <members>Order.Shipping_Track_Number__c</members>
+        <name>CustomField</name>
+    </types>
+    <version>45.0</version>
+</Package>

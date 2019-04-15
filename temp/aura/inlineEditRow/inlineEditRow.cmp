@@ -1,0 +1,93 @@
+<!-- sfdcmonkey.com || Date 12/07/2017 || API Version 41.0 || Child Component-->
+<aura:component controller="inlineEditCtrl">
+  <!-- on component load, fetch picklist values dynamically from apex controller -->   
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <!--declare aura attributes-->
+    <aura:attribute name="objInfoForPicklistValues" type="account" default="{sobjectType : 'Order'}" description="object information to fetch picklist values"/>
+    <aura:attribute name="ratingPicklistOpts" type="string[]" description="store picklist options values"/> 
+    <aura:attribute name="showSaveCancelBtn" type="boolean"/>
+    <aura:attribute name="showErrorClass" type="boolean" default="false"/>
+    <aura:attribute name="sNo" type="string" />
+    <aura:attribute name="singleRec" type="sobject" default="{	'sobjectType' : 'order',
+                                                             	'Id' : '',
+                                                             	'OrderNumber' : '',
+                                                               	'Shipping_Track_Number__c' : '',
+                                                                 'Shipping_Institution__c' : '',
+                                                                 'Shipping_Attention__c' : '',
+                                                                 'Status' : '',
+                                                             	'TotalAmount': '0'
+                                                               }"/>
+    <aura:attribute name="nameEditMode" type="boolean" default="false" />
+    <aura:attribute name="ratingEditMode" type="boolean" default="false" />
+ 
+
+    
+  <ul style="margin-bottom:10px;" class="{!v.singleRec.Shipping_Track_Number__c == '' ? 'slds-has-dividers_around-space insidecard' : 'slds-has-dividers_around-space insidecard hastracknumber'}">
+    <li class="slds-item">
+      <article class="slds-tile slds-tile_board">
+   
+	<!-- LOGIC CODE -->
+    <!--Table Row Start-->  
+    <dl class="slds-list_horizontal slds-wrap">
+        <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Order Number">Order Number</dt>
+        <dd class="slds-item_detail slds-truncate">{!v.singleRec.OrderNumber}</dd>
+        
+        <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Order Number">Total Amount</dt>
+        <dd class="slds-item_detail slds-truncate">{!v.singleRec.TotalAmount}</dd>
+
+        <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Institution">Institution</dt>
+        <dd class="slds-item_detail slds-truncate">{!v.singleRec.Shipping_Institution__c}</dd>
+
+        <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Attention">Attention</dt>
+        <dd class="slds-item_detail slds-truncate">{!v.singleRec.Shipping_Attention__c}</dd>
+  
+        <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Order Number">Status</dt>
+        <dd class="slds-item_detail slds-truncate">{!v.singleRec.Status}</dd>
+
+        <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Tracking">Tracking #</dt>
+        <dd ondblclick="{!c.inlineEditName}" class="{! v.showErrorClass == true ? 'slds-item_detail slds-has-error' : 'slds-item_detail'}">
+            <span class="slds-grid slds-grid_align-spread">
+                <!-- show input and output section based on boolean flag --> 
+                <aura:if isTrue="{!v.nameEditMode == false}">
+                    <span class="slds-truncate" title="Shipping_Track_Number__c">{!v.singleRec.Shipping_Track_Number__c}</span>
+                    <button onclick="{!c.inlineEditName}" class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="0" title="Edit Name">
+                      <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="edit"/>
+                    </button>
+                   
+                    <!-- Inline Edit Section in else case-->  
+                    <aura:set attribute="else">
+                        <section  tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                            <div class="slds-popover__body">
+                                <div class="slds-form-element slds-grid slds-wrap">
+                                    <div class="slds-form-element__control slds-grow">
+                                        <ui:inputText class="slds-input inputFieldWidth"
+                                                      labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                      aura:id="inputId"
+                                                      blur="{!c.closeNameBox}"
+                                                      change="{!c.onNameChange}"
+                                                      maxlength="17"
+                                                      required="true"
+                                                      label="Tracking #"
+                                                      value="{!v.singleRec.Shipping_Track_Number__c}" />
+                                    </div>
+                                </div>
+                            </div>
+                            <span id="form-end" tabindex="0"></span>
+                        </section>  
+                    </aura:set>  
+                </aura:if> 
+            </span>
+        </dd> 
+        
+        
+    </dl>
+    
+    <!-- END LOGIC CODE -->
+         </article>
+    </li>
+        </ul>
+
+
+
+</aura:component>
